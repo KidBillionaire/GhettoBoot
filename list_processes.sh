@@ -10,8 +10,8 @@
 #   -h, --help      Show this help message
 
 show_help() {
-    echo "GhettoBoot Process Listing Script"
-    echo "=================================="
+    echo "😊 GhettoBoot Process Listing Script"
+    echo "===================================="
     echo ""
     echo "Usage: $0 [option]"
     echo ""
@@ -34,15 +34,15 @@ show_help() {
 # Default action: show all processes
 case "$1" in
     -a|--all)
-        echo "=== All Processes ==="
+        echo "😊 === All Processes ==="
         ps aux
         ;;
     -m|--memory)
-        echo "=== Processes Sorted by Memory Usage ==="
+        echo "😊 === Processes Sorted by Memory Usage ==="
         ps aux --sort=-%mem | head -20
         ;;
     -c|--cpu)
-        echo "=== Processes Sorted by CPU Usage ==="
+        echo "😊 === Processes Sorted by CPU Usage ==="
         ps aux --sort=-%cpu | head -20
         ;;
     -u|--user)
@@ -51,11 +51,11 @@ case "$1" in
             echo "Usage: $0 -u <username>"
             exit 1
         fi
-        echo "=== Processes for User: $2 ==="
+        echo "😊 === Processes for User: $2 ==="
         ps aux | grep "^$2"
         ;;
     -t|--tree)
-        echo "=== Process Tree ==="
+        echo "😊 === Process Tree ==="
         if command -v pstree &> /dev/null; then
             pstree -p
         else
@@ -67,7 +67,7 @@ case "$1" in
         show_help
         ;;
     "")
-        echo "=== All Processes ==="
+        echo "😊 === All Processes ==="
         ps aux
         ;;
     *)
