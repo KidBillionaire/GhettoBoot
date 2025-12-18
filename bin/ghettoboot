@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# GhettoBoot - Free Tier Edition
+# Main CLI wrapper
+
+VERSION="1.0.0"
+
+show_banner() {
+    cat << "EOF"
+   _____ _          _   _        ____              _
+  / ____| |        | | | |      |  _ \            | |
+ | |  __| |__   ___| |_| |_ ___ | |_) | ___   ___ | |_
+ | | |_ | '_ \ / _ \ __| __/ _ \|  _ < / _ \ / _ \| __|
+ | |__| | | | |  __/ |_| || (_) | |_) | (_) | (_) | |_
+  \_____|_| |_|\___|\__|\__\___/|____/ \___/ \___/ \__|
+
+EOF
+    echo "  GhettoBoot Free Tier - v${VERSION}"
+    echo "  Lightweight System Utilities"
+    echo ""
+}
+
+show_help() {
+    show_banner
+    cat << EOF
+Usage: ghettoboot [command] [options]
+
+Commands:
+  processes, ps    List and manage system processes
+  lockdown, lock   Perform system security lockdown (requires root)
+  version, -v      Show version information
+  help, -h         Show this help message
+
+Examples:
+  ghettoboot processes -m              # Show top memory consumers
+  ghettoboot processes -c              # Show top CPU consumers
+  ghettoboot processes -u root         # Filter by user
+
+  sudo ghettoboot lockdown             # Execute system lockdown
+  sudo ghettoboot lockdown --dry-run   # Test lockdown without changes
+
+Quick Access:
+  ghettoboot-processes    Direct access to process tools
+  ghettoboot-lockdown     Direct access to lockdown tools
+
+For detailed help on each command:
+  ghettoboot processes --help
+  ghettoboot lockdown --help
+
+EOF
+}
+
+show_version() {
+    echo "GhettoBoot Free Tier Edition v${VERSION}"
+    echo "Copyright (c) 2024 GhettoBoot Project"
+    echo "License: MIT"
+}
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Main command router
+case "${1:-help}" in
+    processes|ps)
+        shift
+        exec "${SCRIPT_DIR}/list_processes.sh" "$@"
+        ;;
+    lockdown|lock)
+        shift
+        exec "${SCRIPT_DIR}/system-lockdown.sh" "$@"
+        ;;
+    version|-v|--version)
+        show_version
+        ;;
+    help|-h|--help|"")
+        show_help
+        ;;
+    *)
+        echo "Unknown command: $1"
+        echo ""
+        show_help
+        exit 1
+        ;;
+esac

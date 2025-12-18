@@ -1,0 +1,47 @@
+{
+  "name": "ghettoboot",
+  "version": "1.0.0",
+  "description": "Lightweight system utility tools for process management and security lockdown - Free Tier Edition",
+  "main": "index.js",
+  "bin": {
+    "ghettoboot": "./bin/ghettoboot",
+    "ghettoboot-processes": "./bin/list_processes.sh",
+    "ghettoboot-lockdown": "./bin/system-lockdown.sh"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "chmod +x ./bin/list_processes.sh ./bin/system-lockdown.sh ./bin/ghettoboot"
+  },
+  "keywords": [
+    "system",
+    "process",
+    "security",
+    "lockdown",
+    "macos",
+    "linux",
+    "cli",
+    "utility",
+    "sysadmin",
+    "devops"
+  ],
+  "author": "GhettoBoot",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KidBillionaire/GhettoBoot.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "preferGlobal": true,
+  "files": [
+    "bin/",
+    "docs/",
+    "README.md",
+    "LICENSE"
+  ]
+}
