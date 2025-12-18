@@ -8,6 +8,13 @@
 #   -c, --cpu       Sort by CPU usage
 #   -u, --user      Filter by user
 #   -h, --help      Show this help message
+#
+# SECURITY NOTICE:
+# This script contains no post-stop execution mechanisms by design.
+# DO NOT ADD trap handlers, background processes, or persistence mechanisms.
+
+# Security: Explicitly ignore EXIT signals to prevent post-stop execution
+trap '' EXIT
 
 show_help() {
     echo "😊 GhettoBoot Process Listing Script"

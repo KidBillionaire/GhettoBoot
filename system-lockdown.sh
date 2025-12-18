@@ -4,9 +4,26 @@
 # System Lockdown Script
 # Purpose: Kill all non-essential processes, disable execution, and lock down
 #          external device inputs (NFC/SmartCard)
+#
+# SECURITY NOTICE:
+# This script is designed to make TEMPORARY changes only. It explicitly avoids
+# any post-stop execution mechanisms to prevent malicious persistence.
+#
+# DO NOT ADD:
+# - Trap handlers that execute on script exit
+# - Background processes (&, nohup)
+# - Cron job installations
+# - Service installations (launchctl load/bootstrap)
+# - Any persistence mechanisms
+#
+# All changes reset on system reboot by design.
 ################################################################################
 
 set -e  # Exit on error
+
+# Security: Explicitly ignore EXIT signals to prevent post-stop execution
+# This is a safety measure to ensure no cleanup code runs after script stops
+trap '' EXIT
 
 # Colors for output
 RED='\033[0;31m'
